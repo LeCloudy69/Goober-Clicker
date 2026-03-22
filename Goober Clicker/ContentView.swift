@@ -8,16 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var tapCount = 0
-    @State var upgradeCount = 1 // Start with 1 upgrade multiplier
-    
-    // Base cost for the first upgrade
-    let baseCost = 10
-    
-    // Exponential upgrade cost formula
-    var upgradeCost: Int {
-        return Int(pow(1.5, Double(upgradeCount))) * baseCost
-    }
+    @Environment(GameEngine.self) private var gameEngine
     
     var body: some View {
         ZStack {
@@ -29,25 +20,18 @@ struct ContentView: View {
                 Spacer()
                 
                 // Tap count display
-                Text("Tap Count: \(tapCount)")
+                Text("Tap Count: \(gameEngine.tapCount)")
                     .font(.largeTitle)
                     .padding()
                 
-                // Upgrade multiplier display
-                Text("Upgrade Multiplier: x\(upgradeCount)")
-                    .font(.title2)
-                    .padding(.top)
+                Button("Reset (Debug)"){
+                    gameEngine.resetGame()
+                }.padding(.bottom)
                 
-                Button("Reset"){
-                    tapCount = 0
-                    upgradeCount = 1
-                }
-                
-                //Spacer()
                 
                 // Tap Button
                 Button {
-                    tapCount += upgradeCount // Increase tap count by current upgrade multiplier
+                    gameEngine.clickGoober()
                 } label: {
                     Image("Mischevious") // asset image
                         .resizable()
@@ -55,24 +39,17 @@ struct ContentView: View {
                         .foregroundColor(.yellow)
                         .padding(.top)
                 }
-                //Spacer()
                 
-                // Upgrade Button
-                Button("Upgrade \(upgradeCount) for \(upgradeCost)") {
-                    if tapCount >= upgradeCost {
-                        tapCount -= upgradeCost
-                        upgradeCount += 1 // Increase the multiplier
+                ScrollView{
+                    VStack(spacing: 20) {
+                        ForEach(gameEngine.upgrades) { upgrade in
+                            UpgradeRow(upgrade: upgrade, gameEngine: gameEngine)
+                        }
                     }
-                }
-                .buttonStyle(.borderedProminent)
-                .padding(.top) // Dec11 update from 25 to top
-                .disabled(upgradeCost > tapCount)
-                .opacity(tapCount < upgradeCost ? 0.7 : 1.0)
-                
-                // Progress bar under the button
-                ProgressView(value: min(Double(tapCount), Double(upgradeCost)), total: Double(upgradeCost))
                     .padding(.horizontal)
-                    .padding(.bottom)
+                }
+                .frame(height: 350)
+                
                 
                 Spacer()
         
@@ -81,7 +58,31 @@ struct ContentView: View {
     }
 }
 
+struct UpgradeRow: View {
+    let upgrade: Upgrade
+    let gameEngine: GameEngine
+    
+    var body: some View {
+        VStack {
+            // The button logic talks directly to the engine
+            Button("\(upgrade.name) Lvl \(upgrade.level) - Cost: \(upgrade.currentCost)") {
+                gameEngine.buyUpgrade(id: upgrade.id)
+            }
+            .buttonStyle(.borderedProminent)
+            .disabled(upgrade.currentCost > gameEngine.tapCount)
+            .opacity(gameEngine.tapCount < upgrade.currentCost ? 0.7 : 1.0)
+            
+            // progress bar
+            ProgressView(
+                value: min(Double(gameEngine.tapCount), Double(upgrade.currentCost)),
+                total: Double(upgrade.currentCost)
+            )
+            .tint(.yellow) // Progress bar color
+        }
+    }
+}
 
 #Preview {
     ContentView()
+        .environment(GameEngine())
 }
