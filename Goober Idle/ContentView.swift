@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Goober Clicker
+//  Goober Idle
 //
 //  Created by Not Assigned / ADAGE-154 on 3/3/26.
 //

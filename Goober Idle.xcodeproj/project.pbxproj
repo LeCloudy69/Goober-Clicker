@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		776410442F579483001D207E /* Goober Clicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Goober Clicker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		776410442F579483001D207E /* Goober Idle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Goober Idle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		776410462F579483001D207E /* Goober Clicker */ = {
+		776410462F579483001D207E /* Goober Idle */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Goober Clicker";
+			path = "Goober Idle";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		7764103B2F579482001D207E = {
 			isa = PBXGroup;
 			children = (
-				776410462F579483001D207E /* Goober Clicker */,
+				776410462F579483001D207E /* Goober Idle */,
 				776410452F579483001D207E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		776410452F579483001D207E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				776410442F579483001D207E /* Goober Clicker.app */,
+				776410442F579483001D207E /* Goober Idle.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		776410432F579483001D207E /* Goober Clicker */ = {
+		776410432F579483001D207E /* Goober Idle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7764104F2F579485001D207E /* Build configuration list for PBXNativeTarget "Goober Clicker" */;
+			buildConfigurationList = 7764104F2F579485001D207E /* Build configuration list for PBXNativeTarget "Goober Idle" */;
 			buildPhases = (
 				776410402F579483001D207E /* Sources */,
 				776410412F579483001D207E /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				776410462F579483001D207E /* Goober Clicker */,
+				776410462F579483001D207E /* Goober Idle */,
 			);
-			name = "Goober Clicker";
+			name = "Goober Idle";
 			packageProductDependencies = (
 			);
 			productName = "Goober Clicker";
-			productReference = 776410442F579483001D207E /* Goober Clicker.app */;
+			productReference = 776410442F579483001D207E /* Goober Idle.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7764103F2F579483001D207E /* Build configuration list for PBXProject "Goober Clicker" */;
+			buildConfigurationList = 7764103F2F579483001D207E /* Build configuration list for PBXProject "Goober Idle" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				776410432F579483001D207E /* Goober Clicker */,
+				776410432F579483001D207E /* Goober Idle */,
 			);
 		};
 /* End PBXProject section */
@@ -313,7 +313,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7764103F2F579483001D207E /* Build configuration list for PBXProject "Goober Clicker" */ = {
+		7764103F2F579483001D207E /* Build configuration list for PBXProject "Goober Idle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7764104D2F579485001D207E /* Debug */,
@@ -322,7 +322,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7764104F2F579485001D207E /* Build configuration list for PBXNativeTarget "Goober Clicker" */ = {
+		7764104F2F579485001D207E /* Build configuration list for PBXNativeTarget "Goober Idle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				776410502F579485001D207E /* Debug */,
