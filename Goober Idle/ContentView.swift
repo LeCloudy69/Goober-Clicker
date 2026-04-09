@@ -19,8 +19,8 @@ struct ContentView: View {
             VStack {
                 Spacer()
                 
-                // Tap count display
-                Text("Tap Count: \(gameEngine.tapCount)")
+                // Goober count display
+                Text("Goober Count: \(gameEngine.gooberCount)")
                     .font(.largeTitle)
                     .padding()
                 
@@ -42,8 +42,7 @@ struct ContentView: View {
                 
                 ScrollView{
                     VStack(spacing: 20) {
-                        ForEach(gameEngine.upgrades) { upgrade in
-                            UpgradeRow(upgrade: upgrade, gameEngine: gameEngine)
+                        ForEach(gameEngine.upgrades.filter { gameEngine.lifetimeCountGoobers >= $0.unlockThreshold }) { upgrade in UpgradeRow(upgrade: upgrade, gameEngine: gameEngine)
                         }
                     }
                     .padding(.horizontal)
@@ -69,12 +68,12 @@ struct UpgradeRow: View {
                 gameEngine.buyUpgrade(id: upgrade.id)
             }
             .buttonStyle(.borderedProminent)
-            .disabled(upgrade.currentCost > gameEngine.tapCount) // cost of upgrade > players count bool
-            .opacity(gameEngine.tapCount < upgrade.currentCost ? 0.6 : 1.0) // unbuyable : buyable
+            .disabled(upgrade.currentCost > gameEngine.gooberCount) // cost of upgrade > players count bool
+            .opacity(gameEngine.gooberCount < upgrade.currentCost ? 0.6 : 1.0) // unbuyable : buyable
             
             // progress bar
             ProgressView(
-                value: min(Double(gameEngine.tapCount), Double(upgrade.currentCost)),
+                value: min(Double(gameEngine.gooberCount), Double(upgrade.currentCost)),
                 total: Double(upgrade.currentCost)
             )
             .tint(.yellow) // Progress bar color

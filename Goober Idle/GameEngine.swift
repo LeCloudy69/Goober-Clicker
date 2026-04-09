@@ -12,7 +12,7 @@ import Observation // Required for @Observable in iOS 17+
 
 @Observable
 class GameEngine {
-    var tapCount: Int = 0
+    var gooberCount: Int = 0
     var lifetimeCountGoobers: Int = 0
     
     var upgrades: [Upgrade] = []
@@ -27,8 +27,8 @@ class GameEngine {
         if let index = upgrades.firstIndex(where: { $0.id == id }) {
             let upgrade = upgrades[index]
             
-            if tapCount >= upgrade.currentCost {
-                tapCount -= upgrade.currentCost
+            if gooberCount >= upgrade.currentCost {
+                gooberCount -= upgrade.currentCost
                 upgrades[index].level += 1
             }
             saveGame()
@@ -38,19 +38,23 @@ class GameEngine {
     func clickGoober() {
         if let tap_upgrade = upgrades.first(where: { $0.id == "tap_power" }) {
             let earned = (1 + tap_upgrade.level)
-            tapCount += earned
+            gooberCount += earned
             lifetimeCountGoobers += earned
         } else {
-            tapCount += 1 // fallback if tap_power doesnt exist
+            gooberCount += 1 // fallback if tap_power doesnt exist
             lifetimeCountGoobers += 1
         }
         saveGame()
     }
     
+    // IdleProduction : calculates the production of goobers while user was away
+    //func idleProduction(
+    //let currentTime = Date.now
+    
     // MARK: - Debug / Reset
     func resetGame() {
         // 1. Reset the live variables back to their defaults
-        self.tapCount = 0
+        self.gooberCount = 0
         self.lifetimeCountGoobers = 0
         self.upgrades = Upgrade.starterUpgrades
         saveGame()
@@ -58,7 +62,7 @@ class GameEngine {
     
     // MARK: - Persistence
     private func saveGame() {
-        UserDefaults.standard.set(tapCount, forKey: "tapCount")
+        UserDefaults.standard.set(gooberCount, forKey: "gooberCount")
         UserDefaults.standard.set(lifetimeCountGoobers, forKey: "lifetimeCountGoobers")
         
         if let encodedData = try? JSONEncoder().encode(upgrades) {
@@ -67,7 +71,7 @@ class GameEngine {
     }
     
     private func loadGame() {
-        self.tapCount = UserDefaults.standard.integer(forKey: "tapCount")
+        self.gooberCount = UserDefaults.standard.integer(forKey: "gooberCount")
         self.lifetimeCountGoobers = UserDefaults.standard.integer(forKey: "lifetimeCountGoobers")
             
         if let savedData = UserDefaults.standard.data(forKey: "savedUpgrades"),
